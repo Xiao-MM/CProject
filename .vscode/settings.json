@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "__config": "cpp",
+        "algorithm": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "functional": "cpp",
+        "complex": "cpp"
+    }
+}

@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<iostream>
+using namespace std;
 typedef char ElemType;
 
 typedef struct BiNode{
@@ -8,7 +10,55 @@ typedef struct BiNode{
     struct BiNode *lchild;
     struct BiNode *rchild;
 }BiNode,*BiTree;
+/*-----------------------Queue-----------------------*/
+typedef struct LinkNode{
+    BiNode *data;
+    struct LinkNode *next;
+}LinkNode;
+typedef struct{
+    LinkNode *front,*rear;
+}LinkQueue;
 
+void InitQueue(LinkQueue &Q){
+    Q.front = Q.rear = (LinkNode*)malloc(sizeof(LinkNode));
+    Q.front->next = NULL;
+}
+bool isEmpty(LinkQueue Q){
+    if (Q.front == Q.rear)
+        return true;
+    else
+        return false;
+}
+//Q.rear始终指向队列最后一个元素（除了空值）
+bool EnQueue(LinkQueue &Q,BiNode *x){
+    LinkNode *s = (LinkNode*)malloc(sizeof(LinkNode));
+    s->data = x;
+    s->next = NULL;
+    Q.rear->next = s;//将当前节点挂在队列结尾
+    Q.rear = s;//将指针后移
+    return true;
+}
+//Q.front始终指向头结点
+bool DeQueue(LinkQueue &Q,BiNode* &x){
+    if (Q.front == Q.rear) return false;//队空
+    LinkNode *p = Q.front->next;
+    x = p->data;
+    Q.front->next = p->next;
+    if (p == Q.rear) Q.rear = Q.front;//若只有一个元素，则将出队后的rear指针指向头结点
+    free(p);
+    return true;
+}
+
+void printQueue(LinkQueue Q){
+    LinkNode *p = Q.front->next;
+    while (p){
+       cout<<p->data<<" ";
+       p=p->next;
+    }
+    cout<<endl;
+}
+
+/*-----------------------Stack-----------------------*/
 typedef struct LNode{
     BiTree data;
     struct LNode *next;
@@ -118,14 +168,37 @@ void postOrder(BiTree T){
         }
     }
 }
+void levelOrder(BiTree T){
+    BiNode *p = T;
+    LinkQueue Q;
+    InitQueue(Q);
+    if (p){
+        EnQueue(Q,p);
+        while (!isEmpty(Q)){
+            DeQueue(Q,p);
+            visit(p);
+            if (p->lchild)
+                EnQueue(Q,p->lchild);
+            if (p->rchild)
+                EnQueue(Q,p->rchild);
+        }
+    }
+}
+
 int main(){
     BiTree T = createTree();
+    cout<<"先序遍历：";
     preOrder(T);
-    printf("\n");
+    cout<<endl;
+    cout<<"中序遍历：";
     inOrder(T);
-    printf("\n");
+    cout<<endl;
+    cout<<"后序遍历：";
     postOrder(T);
-    printf("\n");
+    cout<<endl;
+    cout<<"层次遍历：";
+    levelOrder(T);
+    cout<<endl;
     return 0;
 }
 
