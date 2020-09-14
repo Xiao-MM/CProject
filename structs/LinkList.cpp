@@ -8,6 +8,13 @@ typedef struct LNode{
     struct LNode *next;
 }LNode,*LinkList;
 
+//复杂链表定义
+typedef struct CNode{
+    ElemType data;
+    struct CNode *next;
+    struct CNode *sibling;
+}CNode,*CLinkList;
+
 /*---------------------------Basic Method-----------------------------*/
 //头插法建立单链表
 LinkList HeadInsert(LinkList &L){
@@ -43,7 +50,7 @@ LinkList TailInsert(LinkList &L){
 }
 //打印链表
 void printList(LinkList L){
-    LNode *p = L->next;
+    LNode *p = L;
     while (p){
        cout<<p->data<<" ";
        p = p->next; 
@@ -225,10 +232,50 @@ LNode* findCommonNode(LinkList L1,LinkList L2){
     }
     return NULL;
 }
+//将两个有序链表合成一个有序的链表
+LNode* Merge(LinkList &L1,LinkList &L2){
+    //用L1的头结点作为新链表的头结点
+    LNode *p,*q,*r;
+    r = L1;
+    p = L1->next;
+    q = L2->next;
+    while (p&&q){
+        if(p->data < q->data){
+            r->next = p;
+            r = p;
+            p = p->next;
+        }else{
+            r->next = q;
+            r = q;
+            q = q->next;
+        }
+    }
+    if (p) r->next = p; 
+    if (q) r->next = q;
+    free(L2);
+    return L1;
+}
+//将当前节点指向前一个节点完成逆置
+LNode* Reverse(LinkList &L){
+    LNode *pre,*p,*q;//p-当前节点，pre-当前节点的前一个节点，由于会发生断链，则用q来临时保存当前节点
+    pre = L;
+    p = L->next;
+    L->next = NULL;
+    while (p){
+        q = p->next;//用q保存当前节点
+        p->next = pre;//p节点指向前一个节点
+        pre = p;//pre后移
+        p = q;//p后移
+    }
+    return pre;
+}
+
 int main(){
-    // LinkList L;
-    // HeadInsert(L);
-    // printList(L);
+    LinkList L;
+    HeadInsert(L);
+    printList(L);
+    LNode *p = Reverse(L);
+    printList(p);
     // Insert(L,3,7);
     // printList(L);
     // ElemType e;
@@ -241,16 +288,18 @@ int main(){
     // cout<<p->data<<endl;
     // int *a;
     // cout<<sizeof(a)<<endl;
-    LinkList L1;
-    TailInsert(L1);
-    printList(L1);
-    LinkList L2;
-    TailInsert(L2);
-    printList(L2);
-    LNode *r = getLastNode(L2);
-    r->next = L1->next->next->next->next;
-    LNode *c = findCommonNode(L1,L2);
-    cout<<"公共节点的数据为:"<<c->data<<endl;
+    // LinkList L1;
+    // TailInsert(L1);
+    // printList(L1);
+    // LinkList L2;
+    // TailInsert(L2);
+    // printList(L2);
+    // LNode *r = getLastNode(L2);
+    // r->next = L1->next->next->next->next;
+    // LNode *c = findCommonNode(L1,L2);
+    // cout<<"公共节点的数据为:"<<c->data<<endl;
+    // LinkList L = Merge(L1,L2);
+    // printList(L);
     //LNode *p = L->next->next;
     // LNode *q = getLastNode(L);
     // deleteElem(L,q);
