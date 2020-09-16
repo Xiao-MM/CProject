@@ -21,8 +21,7 @@ void insertSort(int arr[],int n){
             //比x小的元素的后一个位置就是待插入的位置
             arr[j+1]=x; 
         }
-    }
-    
+    } 
 }
 int main(){
     int arr[] = {2,1,3,4,8,6};

@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 void Merge(int*,int,int,int);
-
+//分解+合并
 void MergeSort(int *arr, int start, int end){
     int mid = (start + end)/2;
     if (start >= end){
@@ -11,6 +11,7 @@ void MergeSort(int *arr, int start, int end){
     MergeSort(arr, mid+1, end);
     Merge(arr,start,mid,end);
 }
+//归并
 void Merge(int *arr,int start,int mid,int end){
     int *temp = (int *)malloc((end-start+1)*sizeof(int));
     int i = start;
@@ -31,9 +32,8 @@ void Merge(int *arr,int start,int mid,int end){
     free(temp);
 }
 void printArr(int arr[],int len){
-    for (int i = 0; i < len; i++){
+    for (int i = 0; i < len; i++)
        cout<<arr[i]<<" ";
-    }
     cout<<endl;
 }
 int main(){
