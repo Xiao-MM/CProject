@@ -48,28 +48,28 @@ void printQueue(LinkQueue Q){
     }
     cout<<endl;
 }
-int main(){
-    LinkQueue Q;
-    InitQueue(Q);
-    cout<<"当前队列是否为空："<<isEmpty(Q)<<endl;
-    EnQueue(Q,1);
-    printQueue(Q);
-    int value;
-    DeQueue(Q,value);
-    cout<<"当前出队元素为："<<value<<endl;
-    EnQueue(Q,2);
-    EnQueue(Q,3);
-    EnQueue(Q,4);
-    printQueue(Q);
-    DeQueue(Q,value);
-    printQueue(Q);
-    EnQueue(Q,5);
-    EnQueue(Q,6);
-    printQueue(Q);
-    EnQueue(Q,7);
-    printQueue(Q);
-    DeQueue(Q,value);
-    printQueue(Q);
-    EnQueue(Q,7);
-    printQueue(Q);
-}
+// int main(){
+//     LinkQueue Q;
+//     InitQueue(Q);
+//     cout<<"当前队列是否为空："<<isEmpty(Q)<<endl;
+//     EnQueue(Q,1);
+//     printQueue(Q);
+//     int value;
+//     DeQueue(Q,value);
+//     cout<<"当前出队元素为："<<value<<endl;
+//     EnQueue(Q,2);
+//     EnQueue(Q,3);
+//     EnQueue(Q,4);
+//     printQueue(Q);
+//     DeQueue(Q,value);
+//     printQueue(Q);
+//     EnQueue(Q,5);
+//     EnQueue(Q,6);
+//     printQueue(Q);
+//     EnQueue(Q,7);
+//     printQueue(Q);
+//     DeQueue(Q,value);
+//     printQueue(Q);
+//     EnQueue(Q,7);
+//     printQueue(Q);
+// }

@@ -1,4 +1,5 @@
 #include<iostream>
+#include "LinkQueue.cpp"
 using namespace std;
 #define MAX_VERTEX_NUM 20//最大顶点个数
 #define VertexType int//顶点数据类型
@@ -130,11 +131,67 @@ void TopologicalSort(ALGraph G){
         cout<<"图中存在环"<<endl;
     }
 }
+
+int visit[MAX_VERTEX_NUM];//判断顶点数组中的顶点是否被访问
+
+void DFS(ALGraph G, int v){
+    visit[v] = 1;
+    cout<<G.vertices[v].data<<" ";
+    ArcNode *p = G.vertices[v].firstarc;//定义v节点指向的第一个节点
+    while (p){
+        if (!visit[p->adjvex]){//如果该节点未被访问，则递归访问其下一个节点
+            DFS(G,p->adjvex);
+        }
+        p = p->nextarc;//否则换条边继续
+    }
+}
+void DFSTraverse(ALGraph G){
+    //初始化遍历数组
+    for (int i = 0; i < MAX_VERTEX_NUM; i++){
+        visit[i] = 0;
+    }
+    //保证所有顶点都能被遍历到
+    for (int i = 0; i < G.vexnum; i++){
+        if (!visit[i])
+            DFS(G,i);//如果图是连通图，则只会执行一次
+    }
+}
+void BFSTraverse(ALGraph G){
+    LinkQueue Q;
+    InitQueue(Q);
+    //初始化访问数组
+    for (int i = 0; i < MAX_VERTEX_NUM; i++){
+        visit[i] = 0;
+    }
+    for (int i = 0; i < G.vexnum; i++){
+        if (!visit[i]){
+            visit[i] = 1;
+            cout<<G.vertices[i].data<<" ";
+            EnQueue(Q,i);
+            while (!isEmpty(Q)){
+                int x;
+                DeQueue(Q,x);
+                ArcNode *p = G.vertices[x].firstarc;
+                while (p){
+                    if (!visit[p->adjvex]){
+                        visit[p->adjvex] = 1;
+                        cout<<G.vertices[p->adjvex].data<<" ";
+                        EnQueue(Q,p->adjvex);
+                    }
+                    p = p->nextarc;
+                }
+            }        
+        }
+    }
+}
 int main(){
     ALGraph *G = (ALGraph*)malloc(sizeof(ALGraph));
     CreateAOV(G);
     TopologicalSort(*G); 
-
+    DFSTraverse(*G);
+    cout<<endl;
+    BFSTraverse(*G);
+    cout<<endl;
 }
 
 

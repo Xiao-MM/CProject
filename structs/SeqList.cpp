@@ -20,7 +20,7 @@ void IncreaseSize(SeqList &L,int len){
     for (int i = 0; i < L.length; i++){
         L.data[i] = p[i];
     }
-    L.MaxSize = L.MaxSize + len;
+    L.MaxSize += len;
     free(p);
 }
 
