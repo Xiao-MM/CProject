@@ -24,6 +24,7 @@ void perm(int arr[],int start,int n){
         }
     }
 }
+
 int main(){
     int arr[] = {1,2,3};
     perm(arr,0,3);

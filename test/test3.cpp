@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+int A[10];
 int main(){
     union
     {
@@ -18,4 +18,8 @@ int main(){
     else{
         cout <<" 暂无法判断此机器类型！"<<endl;
     }
+    for (int i = 0; i < 10; i++){
+        cout<<A[i]<<" ";
+    }
+    cout<<endl;
 }

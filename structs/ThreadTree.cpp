@@ -73,7 +73,6 @@ void ThreadInOrder(ThreadTree T){
 }
 
 int main(){
-    //----------错误-------------
     ThreadTree T = createTree();
     CreateInThread(T);
     ThreadNode *p = T->rchild;

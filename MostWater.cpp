@@ -4,7 +4,7 @@ using namespace std;
 void getMostWaterInTwoColumns(int A[],int n){
     int i = 0;
     int j = n-1;
-    int Max = 0;
+    int max = 0;
     int left,right;
     int S;
     while(i < j){
@@ -13,8 +13,8 @@ void getMostWaterInTwoColumns(int A[],int n){
         else
             S = A[j]*(j-i);
 
-        if (Max<S){
-            Max = S;
+        if (max<S){
+            max = S;
             left = i;
             right = j;
         }
@@ -23,7 +23,7 @@ void getMostWaterInTwoColumns(int A[],int n){
         else
             j--;
     }
-    cout<<"最大面积："<<Max<<endl;
+    cout<<"最大面积："<<max<<endl;
     cout<<"柱子号为："<<left<<"-"<<right<<endl;
 }
 int main(){

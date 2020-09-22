@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "gcc - 生成和调试活动文件",
+            "name": "g++ - 生成和调试活动文件",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
+            "args": ["<", "input.in"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
-            "preLaunchTask": "C/C++: gcc build active file"
+            "preLaunchTask": "C/C++: g++ build active file"
         }
     ]
 }

@@ -2,7 +2,7 @@
 using namespace std;
 
 //获取next数组（next数组为pmt整体右移一位获取的）
-void getNext(char *p, int *next){
+void getNext(const char *p, int *next){
     //以自身分别为主串和子串进行模式匹配，i位置所在的next[i]值即为所匹配的最大公共前后缀的长度
     next[0] = -1;
     int i = 0,j = -1;
@@ -16,7 +16,7 @@ void getNext(char *p, int *next){
     }
 }
 
-int KMP(char *t,char *p,int *next){
+int KMP(const char *t,const char *p,int *next){
     getNext(p,next);
     int i = 0, j = 0;
     while (i < strlen(t) && j < strlen(p)){
@@ -27,13 +27,13 @@ int KMP(char *t,char *p,int *next){
             j = next[j];
     }
     if(j == strlen(p))
-        return i-j;
+        return i - j;
     else
         return -1;
     
 }
 int main(){
-    char *t="ababababca",*p="abababca";
+    const char *t="ababababca",*p="abababca";
     int next[8];
     int i = KMP(t,p,next);
     cout<<i<<endl;
